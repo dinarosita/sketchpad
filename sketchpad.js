@@ -17,15 +17,17 @@ function makeGrid(length) {
     updateSize(length);
 }
 
-function trailHover(e) {
-    this.classList.add("hover");
+function basicTrail(e) {
+    // this.style.backgroundColor = "cadetblue";
+    // this.style.backgroundColor = randomColor();
+    // this.style.backgroundColor = unicornColor();
+    this.style.backgroundColor = pastelColor();
 }
 
 function activatePad() {
     const gridCell = document.getElementsByClassName("cell");
-    Array.from(gridCell).forEach(c => c.addEventListener("mouseover", trailHover));
-}
- 
+    Array.from(gridCell).forEach(c => c.addEventListener("mouseover", basicTrail));
+} 
 
 function changeSize() {
     let length = prompt("Length (1-100): ", 16);
@@ -50,7 +52,7 @@ function updateSize(length) {
 
 function refresh() {
     const gridCell = document.getElementsByClassName("cell");
-    Array.from(gridCell).forEach(e => e.classList.remove("hover"));
+    Array.from(gridCell).forEach(e => e.style.backgroundColor = "");
 }
 
 const sizeButton = document.getElementById("sizeButton");
@@ -60,3 +62,24 @@ sizeButton.addEventListener("click", changeSize);
 refreshButton.addEventListener("click", refresh);
 makeGrid(16);
 activatePad();
+
+function randomColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+function unicornColor() {
+    let r = Math.floor(Math.random() * 150 + 100);
+    let g = 50;
+    let b = 200;
+    return `rgb(${r}, ${g}, ${b}, 50%)`;
+}
+
+function pastelColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b}, 40%)`;
+}
