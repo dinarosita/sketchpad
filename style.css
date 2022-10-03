@@ -4,13 +4,20 @@ html {
     max-width: 940px;
     margin: auto;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
     font-family: 'Barlow', 'Roboto', sans-serif; 
     line-height: 1.4;
+    color: cadetblue;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0.5rem;
 }
     
 #grid {
@@ -33,4 +40,35 @@ html {
 }
 .hover {
     background-color: cadetblue;
+}
+
+button {
+    text-align: center;
+    padding: 5px 20px;
+    color: cadetblue;
+    font-weight: bold;
+    background-color: mistyrose;
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0.5rem;
+}
+
+button:hover {
+    background-color: cadetblue;
+    color: mistyrose;
+    border: 2px solid mistyrose;
+}
+
+.text {
+    font-size: x-large;
+    font-weight: bold;
+    color: cadetblue;
+    text-align: center;
+    padding: 20px;
+}
+
+#top {
+    text-align: center;
+    padding: 20px;
 }
