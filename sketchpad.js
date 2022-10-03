@@ -18,10 +18,17 @@ function makeGrid(length) {
 }
 
 function basicTrail(e) {
-    // this.style.backgroundColor = "cadetblue";
-    // this.style.backgroundColor = randomColor();
-    // this.style.backgroundColor = unicornColor();
-    this.style.backgroundColor = pastelColor();
+    if (penMode === "standard") {
+        this.style.backgroundColor = "cadetblue";
+    } else if (penMode === "sprinkles") {
+        this.style.backgroundColor = randomColor();
+    } else if (penMode === "unicorn") {
+        this.style.backgroundColor = unicornColor();
+    } else if (penMode === "pastel") {
+        this.style.backgroundColor = pastelColor();
+    } else if (penMode === "grayscale") {
+        this.style.backgroundColor = grayPressure();
+    }
 }
 
 function activatePad() {
@@ -83,3 +90,18 @@ function pastelColor() {
     let b = Math.floor(Math.random() * 256);
     return `rgb(${r}, ${g}, ${b}, 40%)`;
 }
+
+let penMode = "standard";
+function changePen(e) {
+    penMode = this.id;
+}
+
+function grayPressure() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(0, 0, 0, 10%)`;
+}
+
+const pens = document.getElementsByClassName("pen");
+Array.from(pens).forEach(p => p.addEventListener("click", changePen));

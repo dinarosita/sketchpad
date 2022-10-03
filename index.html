@@ -11,14 +11,21 @@
     </head>
     <body>
         <main>
-            <section id="top">
+            <section class="nongrid">
                 <h1>Sketchpad</h1>
                 <div>Size: <span id="horizontal"></span> x <span id="vertical"></span></div>
                 <button id="sizeButton">Change size</button>
                 <button id="refreshButton">Refresh</button>
-
             </section>
             <section id="grid"></section>
+            <section class="nongrid">
+                <div>Pen mode:</div>
+                <button class="pen" id="standard">Standard</button>
+                <button class="pen" id="sprinkles">Sprinkles</button>
+                <button class="pen" id="unicorn">Unicorn</button>
+                <button class="pen" id="pastel">Pastel</button>
+                <button class="pen" id="grayscale">Grayscale</button>
+            </section>
         </main>     
 
         <script src="sketchpad.js"></script>
