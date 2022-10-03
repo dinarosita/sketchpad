@@ -1,0 +1,36 @@
+/* style.css */
+
+html {
+    max-width: 940px;
+    margin: auto;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Barlow', 'Roboto', sans-serif; 
+    line-height: 1.4;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+    
+#grid {
+    display: flex;
+    flex-direction: column;    
+    min-height: 960px;
+    min-width: 960px;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.cell {
+    flex: 1;
+    background-color: white;
+    border: 1px solid mistyrose;
+}
+.hover {
+    background-color: cadetblue;
+}
