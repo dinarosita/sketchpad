@@ -24,9 +24,7 @@ function makeGrid(length) {
     }
 }
 
-function activatePad() {
-    Array.from(gridCell).forEach(c => c.addEventListener("mouseover", draw));
-} 
+
 
 function changeSize() {
     let length = prompt("Length (1-100): ", 16);
@@ -63,52 +61,59 @@ function changePen(e) {
     penMode = this.id;
 }
 
+function activatePad() {
+    ["mousedown", "mouseover"].forEach(ev => Array.from(gridCell).forEach(c => c.addEventListener(ev, draw)));
+} 
+
 function draw(e) {
-    if (penMode === "standard") {
-        if (this.name === "standard") {
-            if (this.style.opacity < 1) {
-                this.style.opacity = Number(this.style.opacity) + 0.1;
-            } 
-        } else {
-            this.style.backgroundColor = "cadetblue";
-            this.style.opacity = 0.1;
-            this.name = "standard";
-        }
-    } else if (penMode === "grayscale") {
-        if (this.name === "grayscale") {
-            if (this.style.opacity < 1) {
-                this.style.opacity = Number(this.style.opacity) + 0.1;
-            } 
-        } else {
-            this.style.backgroundColor = "black";
-            this.style.opacity = 0.1;
-            this.name = "grayscale";
-        }
-    } else if (penMode === "sprinkles") {
-        if (this.name === "sprinkles") {
-            if (this.style.opacity < 1) {
-                this.style.opacity = Number(this.style.opacity) + 0.1;
-            } 
-        } else {
-            this.style.backgroundColor = `rgb(${random256()}, ${random256()}, ${random256()})`;
-            this.style.opacity = 0.1;
-            this.name = "sprinkles";
-        }
-    } else if (penMode === "unicorn") {
-        if (this.name === "unicorn") {
-            if (this.style.opacity < 1) {
-                this.style.opacity = Number(this.style.opacity) + 0.1;
-            } 
-        } else {
-            this.style.backgroundColor = `rgb(${random256()}, 50, 200)`;
-            this.style.opacity = 0.1;
-            this.name = "unicorn";
-        }
-    } else if (penMode === "eraser") {
-        this.style.backgroundColor = "";
-        this.style.opacity = "";
-        this.name = "";
-    } 
+    if (e.buttons === 1) {
+        e.preventDefault()
+        if (penMode === "standard") {
+            if (this.name === "standard") {
+                if (this.style.opacity < 1) {
+                    this.style.opacity = Number(this.style.opacity) + 0.1;
+                } 
+            } else {
+                this.style.backgroundColor = "cadetblue";
+                this.style.opacity = 0.1;
+                this.name = "standard";
+            }
+        } else if (penMode === "grayscale") {
+            if (this.name === "grayscale") {
+                if (this.style.opacity < 1) {
+                    this.style.opacity = Number(this.style.opacity) + 0.1;
+                } 
+            } else {
+                this.style.backgroundColor = "black";
+                this.style.opacity = 0.1;
+                this.name = "grayscale";
+            }
+        } else if (penMode === "sprinkles") {
+            if (this.name === "sprinkles") {
+                if (this.style.opacity < 1) {
+                    this.style.opacity = Number(this.style.opacity) + 0.1;
+                } 
+            } else {
+                this.style.backgroundColor = `rgb(${random256()}, ${random256()}, ${random256()})`;
+                this.style.opacity = 0.1;
+                this.name = "sprinkles";
+            }
+        } else if (penMode === "unicorn") {
+            if (this.name === "unicorn") {
+                if (this.style.opacity < 1) {
+                    this.style.opacity = Number(this.style.opacity) + 0.1;
+                } 
+            } else {
+                this.style.backgroundColor = `rgb(${random256()}, 50, 200)`;
+                this.style.opacity = 0.1;
+                this.name = "unicorn";
+            }
+        } else if (penMode === "eraser") {
+            this.style.backgroundColor = "";
+            this.style.opacity = "";
+            this.name = "";
+        } 
+    }    
 }
 
 sizeButton.addEventListener("click", changeSize);
