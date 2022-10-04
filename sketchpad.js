@@ -1,39 +1,31 @@
+const grid = document.getElementById("grid");
+const sizeButton = document.getElementById("sizeButton");
+const refreshButton = document.getElementById("refreshButton");
+const gridCell = document.getElementsByClassName("cell");
+const lengths = document.getElementsByClassName("length");
+const pens = document.getElementsByClassName("pen");
+
+let penMode = "standard";
+
 function makeGrid(length) {
-    const grid = document.getElementById("grid");
     grid.textContent = "";
     for (let i = 1; i <= length; i++) {
         const row = document.createElement("div");
         row.classList = "row";
-        row.id = `r${i.toString().padStart(2, "0")}`;
+        // row.id = `r${i.toString().padStart(2, "0")}`;
         grid.appendChild(row);
         
         for (let j = 1; j <= length; j++) {
             const cell = document.createElement("div");
             cell.classList = "cell";
-            cell.id = `${row.id}c${j.toString().padStart(2, "0")}`;
+            // cell.id = `${row.id}c${j.toString().padStart(2, "0")}`;
             row.appendChild(cell);
         }
-    }
-    updateSize(length);
-}
-
-function basicTrail(e) {
-    if (penMode === "standard") {
-        this.style.backgroundColor = "cadetblue";
-    } else if (penMode === "sprinkles") {
-        this.style.backgroundColor = randomColor();
-    } else if (penMode === "unicorn") {
-        this.style.backgroundColor = unicornColor();
-    } else if (penMode === "pastel") {
-        this.style.backgroundColor = pastelColor();
-    } else if (penMode === "grayscale") {
-        this.style.backgroundColor = grayPressure();
     }
 }
 
 function activatePad() {
-    const gridCell = document.getElementsByClassName("cell");
-    Array.from(gridCell).forEach(c => c.addEventListener("mouseover", basicTrail));
+    Array.from(gridCell).forEach(c => c.addEventListener("mouseover", draw));
 } 
 
 function changeSize() {
@@ -48,60 +40,76 @@ function changeSize() {
 
     makeGrid(length);
     activatePad();
+    updateSize(length);
 }
 
-function updateSize(length) {
-    const horizontal = document.getElementById("horizontal");
-    horizontal.textContent = length;
-    const vertical = document.getElementById("vertical");
-    vertical.textContent = length;
+function updateSize(l) {
+    Array.from(lengths).forEach(e => e.textContent = l);
 }
 
 function refresh() {
-    const gridCell = document.getElementsByClassName("cell");
     Array.from(gridCell).forEach(e => e.style.backgroundColor = "");
 }
 
-const sizeButton = document.getElementById("sizeButton");
-const refreshButton = document.getElementById("refreshButton");
-
-sizeButton.addEventListener("click", changeSize);
-refreshButton.addEventListener("click", refresh);
-makeGrid(16);
-activatePad();
-
-function randomColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b})`;
+function random256() {
+    return Math.floor(Math.random() * 256);
 }
 
-function unicornColor() {
-    let r = Math.floor(Math.random() * 150 + 100);
-    let g = 50;
-    let b = 200;
-    return `rgb(${r}, ${g}, ${b}, 50%)`;
-}
-
-function pastelColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b}, 40%)`;
-}
-
-let penMode = "standard";
 function changePen(e) {
     penMode = this.id;
 }
 
-function grayPressure() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return `rgb(0, 0, 0, 10%)`;
+function draw(e) {
+    if (penMode === "standard") {
+        if (this.name === "standard") {
+            if (this.style.opacity < 1) {
+                this.style.opacity = Number(this.style.opacity) + 0.1;
+            } 
+        } else {
+            this.style.backgroundColor = "cadetblue";
+            this.style.opacity = 0.1;
+            this.name = "standard";
+        }
+    } else if (penMode === "grayscale") {
+        if (this.name === "grayscale") {
+            if (this.style.opacity < 1) {
+                this.style.opacity = Number(this.style.opacity) + 0.1;
+            } 
+        } else {
+            this.style.backgroundColor = "black";
+            this.style.opacity = 0.1;
+            this.name = "grayscale";
+        }
+    } else if (penMode === "sprinkles") {
+        if (this.name === "sprinkles") {
+            if (this.style.opacity < 1) {
+                this.style.opacity = Number(this.style.opacity) + 0.1;
+            } 
+        } else {
+            this.style.backgroundColor = `rgb(${random256()}, ${random256()}, ${random256()})`;
+            this.style.opacity = 0.1;
+            this.name = "sprinkles";
+        }
+    } else if (penMode === "unicorn") {
+        if (this.name === "unicorn") {
+            if (this.style.opacity < 1) {
+                this.style.opacity = Number(this.style.opacity) + 0.1;
+            } 
+        } else {
+            this.style.backgroundColor = `rgb(${random256()}, 50, 200)`;
+            this.style.opacity = 0.1;
+            this.name = "unicorn";
+        }
+    } else if (penMode === "eraser") {
+        this.style.backgroundColor = "";
+        this.style.opacity = "";
+        this.name = "";
+    } 
 }
 
-const pens = document.getElementsByClassName("pen");
+sizeButton.addEventListener("click", changeSize);
+refreshButton.addEventListener("click", refresh);
 Array.from(pens).forEach(p => p.addEventListener("click", changePen));
+
+makeGrid(16);
+activatePad();
