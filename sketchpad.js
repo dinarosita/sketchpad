@@ -48,7 +48,11 @@ function updateSize(l) {
 }
 
 function refresh() {
-    Array.from(gridCell).forEach(e => e.style.backgroundColor = "");
+    Array.from(gridCell).forEach(e => {
+        e.style.backgroundColor = "";
+        e.style.opacity = "";
+        e.name = "";
+    });
 }
 
 function random256() {
