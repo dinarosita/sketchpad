@@ -113,7 +113,8 @@ function draw(e) {
             this.style.opacity = "";
             this.name = "";
         } 
-    }    
+    } 
+    this.style.border = "1px solid mistyrose"   
 }
 
 sizeButton.addEventListener("click", changeSize);
